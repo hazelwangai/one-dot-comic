@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>One Dot / 一筒</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#151514;color:#f7f5ef;font:16px system-ui,sans-serif}header,nav,main,footer{max-width:760px;margin:auto}header{padding:20px 12px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px}h1{margin:0;font-size:clamp(23px,6vw,42px);font-weight:950;letter-spacing:-.06em}h1 span{font-size:.55em;letter-spacing:0}nav{position:sticky;top:0;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:7px;padding:8px;background:#151514;border-block:1px solid #444}button,select{font:inherit;min-height:44px;border:1px solid #666;border-radius:4px;background:#2b2b29;color:#fff;padding:4px 8px}button:disabled{opacity:.44}button:not(:disabled){cursor:pointer}:focus-visible{outline:2px solid #ffd069;outline-offset:2px}main{padding:8px}img{display:block;width:100%;height:auto;aspect-ratio:440/540;background:#fff}footer{text-align:center;padding:8px 0 24px;color:#d0cbc0}#print-pages{display:none}@media(max-width:420px){button,select{font-size:14px}}@media print{@page{size:portrait;margin:0}body{background:#fff}header,nav,main,footer,noscript{display:none!important}#print-pages{display:block}#print-pages img{width:100%;height:98vh;object-fit:contain;break-after:page}#print-pages img:last-child{break-after:auto}}
+</style><body>
+<header><h1>ONE DOT <span lang="zh">一筒</span></h1><button id="print" type="button">Print / Save PDF</button></header>
+<nav aria-label="Comic navigation"><button id="prev" type="button" aria-label="Previous page">← Prev</button><select id="jump" aria-label="Jump to a comic page"></select><button id="next" type="button" aria-label="Next page">Next →</button></nav>
+<main><img id="art" src="page-01.jpg" alt="One Dot, page 1"></main><section id="print-pages" aria-hidden="true"></section><footer id="status" aria-live="polite">Page 1 of 21</footer>
+<noscript><p>Enable JavaScript to read all 21 pages.</p></noscript>
+<script>
+const chapters=['Inheritance','The Empty Chair','A Borrowed Seat','Drawn Away','The Ledger','Old Debts','One Dot'];
+const starts=[1,4,7,9,12,15,18,22], total=21;
+const art=document.querySelector('#art'),jump=document.querySelector('#jump'),prev=document.querySelector('#prev'),next=document.querySelector('#next'),status=document.querySelector('#status'),printButton=document.querySelector('#print');
+let page=1;
+const source=n=>'page-'+String(n).padStart(2,'0')+'.jpg';
+chapters.forEach((chapter,index)=>{const group=document.createElement('optgroup');group.label=chapter;for(let n=starts[index];n<starts[index+1];n++)group.append(new Option(n+' / 21 · '+chapter,n));jump.append(group)});
+function show(n,writeHash){page=Number.isInteger(n)?Math.max(1,Math.min(total,n)):1;art.src=source(page);art.alt='One Dot, page '+page;jump.value=page;prev.disabled=page===1;next.disabled=page===total;status.textContent='Page '+page+' of '+total;if(writeHash)history.pushState(null,'','#page-'+page);scrollTo(0,0);if(page<total)new Image().src=source(page+1)}
+function restore(){show(Number(location.hash.match(/^#page-([0-9]+)$/)?.[1]||1),false)}
+prev.onclick=()=>show(page-1,true);next.onclick=()=>show(page+1,true);jump.onchange=()=>show(Number(jump.value),true);addEventListener('hashchange',restore);addEventListener('keydown',event=>{if(event.target.matches('select,button,input,textarea')||event.altKey||event.metaKey||event.ctrlKey||event.shiftKey)return;if(event.key==='ArrowLeft'&&page>1)show(page-1,true);if(event.key==='ArrowRight'&&page<total)show(page+1,true)});
+printButton.onclick=async()=>{printButton.disabled=true;printButton.textContent='Preparing…';try{const images=Array.from({length:total},(_,i)=>{const image=new Image();image.src=source(i+1);return image});await Promise.all(images.map(image=>image.decode()));document.querySelector('#print-pages').replaceChildren(...images);window.print()}catch{status.textContent='A page failed to load. Try printing again.'}finally{printButton.disabled=false;printButton.textContent='Print / Save PDF'}};
+restore();
+</script></body></html>
