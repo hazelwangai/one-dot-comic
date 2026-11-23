@@ -2,10 +2,25 @@
 <html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>One Dot / 一筒</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#151514;color:#f7f5ef;font:16px system-ui,sans-serif}header,nav,main,footer{max-width:760px;margin:auto}header{padding:20px 12px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px}h1{margin:0;font-size:clamp(23px,6vw,42px);font-weight:950;letter-spacing:-.06em}h1 span{font-size:.55em;letter-spacing:0}nav{position:sticky;top:0;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:7px;padding:8px;background:#151514;border-block:1px solid #444}button,select{font:inherit;min-height:44px;border:1px solid #666;border-radius:4px;background:#2b2b29;color:#fff;padding:4px 8px}button:disabled{opacity:.44}button:not(:disabled){cursor:pointer}:focus-visible{outline:2px solid #ffd069;outline-offset:2px}main{padding:8px}img{display:block;width:100%;height:auto;aspect-ratio:440/540;background:#fff}footer{text-align:center;padding:8px 0 24px;color:#d0cbc0}#print-pages{display:none}@media(max-width:420px){button,select{font-size:14px}}@media print{@page{size:portrait;margin:0}body{background:#fff}header,nav,main,footer,noscript{display:none!important}#print-pages{display:block}#print-pages img{width:100%;height:98vh;object-fit:contain;break-after:page}#print-pages img:last-child{break-after:auto}}
+
+:root{color-scheme:dark;--red:#ff5a50;--chrome:#232220;--line:#3b3733}
+body{background:radial-gradient(ellipse at 50% 18%,#302824 0,#161514 56%);min-height:100vh}
+header{max-width:1080px;padding:22px 24px;border-bottom:1px solid var(--line);align-items:center}
+h1{font-family:Impact,'Arial Black',system-ui,sans-serif;letter-spacing:.015em;transform:skew(-5deg);line-height:1}
+h1 span{color:var(--red);margin-left:.16em}
+#reader{max-width:1080px;display:grid;grid-template-columns:minmax(210px,255px) minmax(0,580px);justify-content:center;gap:clamp(20px,5vw,70px);padding:28px 24px 44px;align-items:start}
+.controls{position:sticky;top:24px;padding-top:12px}.context{margin:0 0 12px;color:var(--red);font:bold 12px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase}.chapter{font-size:clamp(24px,4vw,44px);line-height:.99;letter-spacing:-.055em;margin:0 0 20px}.controls nav{position:static;padding:0;display:grid;grid-template-columns:1fr 1fr;border:0;background:transparent}.controls select{grid-column:1/-1;grid-row:1;width:100%;min-width:0}.controls button,.controls select{border-color:var(--line);background:var(--chrome)}#next:not(:disabled){background:var(--red);color:#1d1211;font-weight:750;border-color:var(--red)}
+.reading-tools{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px}#status{margin:0;color:#cbc2b8;font:12px ui-monospace,monospace}.reading-tools button{background:transparent}.bar{display:block;width:100%;height:3px;margin-top:16px;appearance:none;border:none;background:#3d3632;color:var(--red)}.bar::-webkit-progress-bar{background:#3d3632}.bar::-webkit-progress-value{background:var(--red)}.bar::-moz-progress-bar{background:var(--red)}
+#stage{position:relative;min-width:0;aspect-ratio:440/540;background:#f7f5ef;box-shadow:5px 5px 0 #827a6b,9px 10px 0 #4b443c,0 18px 42px #0009;perspective:1150px;touch-action:pan-y pinch-zoom}#art{position:absolute;inset:0}.leaf{position:absolute;inset:0;z-index:4;pointer-events:none;overflow:hidden;backface-visibility:hidden;box-shadow:inset 0 0 30px #251c15}.leaf img{height:100%}.leaf::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 42%,#1f170b55)}
+.pin{position:absolute;z-index:2;display:grid;place-items:center;min-width:44px;min-height:44px;transform:translate(-100%,-100%);border-radius:50%;border:2px solid #201715;background:var(--red);color:#1b1110;font:bold 23px system-ui;box-shadow:0 2px 0 #0008}.pin:hover,.pin:focus-visible{background:#fff1e0}
+dialog{color:#f7f5ef;background:#1b1918;border:1px solid #59514b;padding:0;width:min(95vw,1000px);max-width:none;max-height:94dvh;box-shadow:0 24px 100px #000}dialog::backdrop{background:#0a0808df}dialog .modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 12px;border-bottom:1px solid var(--line)}#zoom-title{font-size:16px;margin:0}.modal-head button{background:#282320}.zoom-content{padding:10px;overflow:auto;max-height:calc(94dvh - 64px)}.crop{position:relative;overflow:hidden;margin:auto}.crop img{max-width:none;position:absolute;aspect-ratio:auto;height:auto}
+@media(max-width:700px){header{padding:12px 14px}#reader{grid-template-columns:minmax(0,540px);gap:12px;padding:10px 12px 25px}.controls{top:0;z-index:6;background:#171514;padding:8px 0}.context{margin-bottom:4px}.chapter{font-size:23px;margin-bottom:8px}.controls nav{grid-template-columns:auto minmax(0,1fr) auto;gap:5px}.controls select{grid-column:2;grid-row:auto}.reading-tools{margin-top:5px}.reading-tools button{min-height:36px}.bar{margin-top:5px}}
+@media print{#reader{display:none!important}dialog{display:none!important}}
 </style><body>
 <header><h1>ONE DOT <span lang="zh">一筒</span></h1><button id="print" type="button">Print / Save PDF</button></header>
-<nav aria-label="Comic navigation"><button id="prev" type="button" aria-label="Previous page">← Prev</button><select id="jump" aria-label="Jump to a comic page"></select><button id="next" type="button" aria-label="Next page">Next →</button></nav>
-<main><img id="art" src="page-01.jpg" alt="One Dot, page 1"></main><section id="print-pages" aria-hidden="true"></section><footer id="status" aria-live="polite">Page 1 of 21</footer>
+<main id="reader"><aside class="controls" aria-label="Reader controls"><p class="context" id="episode">EP00</p><h2 class="chapter" id="chapter">Inheritance</h2><nav aria-label="Comic navigation"><button id="prev" type="button" aria-label="Previous page">← Prev</button><select id="jump" aria-label="Jump to a comic page"></select><button id="next" type="button" aria-label="Next page">Next →</button></nav>
+<div class="reading-tools"><p id="status" aria-live="polite">Page 1 of 21</p><button id="zoom" type="button">Zoom page</button></div><progress id="progress" class="bar" aria-label="Reading progress" value="1" max="21"></progress></aside><section id="stage" aria-label="Comic page"><img id="art" src="page-01.jpg" alt="One Dot, page 1" width="1056" height="1296" draggable="false"></section></main>
+<dialog id="zoom-dialog" aria-labelledby="zoom-title"><div class="modal-head"><h2 id="zoom-title">Panel detail</h2><form method="dialog"><button type="submit" autofocus>Close ×</button></form></div><div class="zoom-content" id="zoom-content"></div></dialog><section id="print-pages" aria-hidden="true"></section>
 <noscript><p>Enable JavaScript to read all 21 pages.</p></noscript>
 <script>
 const chapters=['Inheritance','The Empty Chair','A Borrowed Seat','Drawn Away','The Ledger','Old Debts','One Dot'];
@@ -14,9 +29,78 @@ const art=document.querySelector('#art'),jump=document.querySelector('#jump'),pr
 let page=1;
 const source=n=>'page-'+String(n).padStart(2,'0')+'.jpg';
 chapters.forEach((chapter,index)=>{const group=document.createElement('optgroup');group.label=chapter;for(let n=starts[index];n<starts[index+1];n++)group.append(new Option(n+' / 21 · '+chapter,n));jump.append(group)});
-function show(n,writeHash){page=Number.isInteger(n)?Math.max(1,Math.min(total,n)):1;art.src=source(page);art.alt='One Dot, page '+page;jump.value=page;prev.disabled=page===1;next.disabled=page===total;status.textContent='Page '+page+' of '+total;if(writeHash)history.pushState(null,'','#page-'+page);scrollTo(0,0);if(page<total)new Image().src=source(page+1)}
+const stage=document.querySelector('#stage'), episode=document.querySelector('#episode'), chapterHeading=document.querySelector('#chapter'), progress=document.querySelector('#progress');
+const modal=document.querySelector('#zoom-dialog'), zoomTitle=document.querySelector('#zoom-title'), zoomContent=document.querySelector('#zoom-content');
+const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
+// Fractions of the original 1056 × 1296 page images.
+const panels={1:[['The One Dot',.058,.54,.43,.33]],11:[['BANG!',.063,.67,.88,.142]],21:[['The final tile',.67,.646,.266,.264]]};
+let pending=0, gesture;
+function openDetail(title,x=0,y=0,w=1,h=1){
+  zoomTitle.textContent=title;
+  const crop=document.createElement('div');
+  const ratio=w*1056/(h*1296);
+  crop.className='crop';
+  crop.style.width='min(100%, '+(ratio*79)+'dvh)';
+  crop.style.aspectRatio=ratio;
+  const image=new Image();
+  image.src=source(page);
+  image.alt=title;
+  Object.assign(image.style,{width:100/w+'%',left:-100*x/w+'%',top:-100*y/h+'%'});
+  crop.append(image);
+  zoomContent.replaceChildren(crop);
+  modal.showModal();
+}
+function markPanels(){
+  stage.querySelectorAll('.pin').forEach(pin=>pin.remove());
+  for(const detail of panels[page]||[]){
+    const [title,x,y,w,h]=detail;
+    const pin=document.createElement('button');
+    pin.type='button';pin.className='pin';pin.textContent='+';
+    pin.setAttribute('aria-label','Enlarge panel: '+title);
+    pin.style.left=(x+w)*100+'%';pin.style.top=(y+h)*100+'%';
+    pin.onclick=()=>openDetail(...detail);
+    stage.append(pin);
+  }
+}
+function turn(outgoing,forward){
+  stage.querySelector('.leaf')?.remove();
+  if(reducedMotion.matches || !stage.animate)return;
+  const leaf=document.createElement('div');
+  leaf.className='leaf';leaf.setAttribute('aria-hidden','true');leaf.append(outgoing);
+  leaf.style.transformOrigin=forward?'left center':'right center';
+  stage.append(leaf);
+  const motion=leaf.animate([{transform:'rotateY(0deg)',filter:'brightness(1)'},{transform:'rotateY('+(forward?-93:93)+'deg)',filter:'brightness(.55)',opacity:.6}],{duration:510,easing:'cubic-bezier(.22,.64,.26,1)',fill:'forwards'});
+  motion.onfinish=()=>leaf.remove();
+}
+async function show(n,writeHash){
+  const target=Number.isInteger(n)?Math.max(1,Math.min(total,n)):1;
+  const call=++pending;
+  const previous=page;
+  if(target!==previous){
+    const preload=new Image();preload.src=source(target);
+    try{await preload.decode()}catch{if(call===pending){status.textContent='Page '+target+' could not load. Try again.';jump.value=page}return}
+    if(call!==pending)return;
+    const old=art.cloneNode(false);old.removeAttribute('id');old.alt='';
+    art.src=source(target);
+    turn(old,target>previous);
+  }
+  page=target;art.alt='One Dot, page '+page;jump.value=page;
+  prev.disabled=page===1;next.disabled=page===total;
+  status.textContent='Page '+page+' of '+total;progress.value=page;
+  const chapterIndex=starts.findIndex(start=>start>page)-1;
+  episode.textContent='EP'+String(chapterIndex).padStart(2,'0');chapterHeading.textContent=chapters[chapterIndex];
+  markPanels();
+  if(writeHash && location.hash!=='#page-'+page)history.pushState(null,'','#page-'+page);
+  if(target!==previous)window.scrollTo(0,0);
+  for(const nearby of [page-1,page+1])if(nearby>=1&&nearby<=total)new Image().src=source(nearby);
+}
+document.querySelector('#zoom').onclick=()=>openDetail('Page '+page+' detail');
+modal.addEventListener('click',event=>{if(event.target===modal)modal.close()});
+stage.addEventListener('pointerdown',event=>{if(event.pointerType!=='mouse' && event.isPrimary && !event.target.closest('button'))gesture={id:event.pointerId,x:event.clientX,y:event.clientY}});
+stage.addEventListener('pointercancel',()=>{gesture=null});
+window.addEventListener('pointerup',event=>{if(gesture?.id!==event.pointerId)return;const dx=event.clientX-gesture.x,dy=event.clientY-gesture.y;gesture=null;if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)*1.4)show(page+(dx<0?1:-1),true)});
 function restore(){show(Number(location.hash.match(/^#page-([0-9]+)$/)?.[1]||1),false)}
-prev.onclick=()=>show(page-1,true);next.onclick=()=>show(page+1,true);jump.onchange=()=>show(Number(jump.value),true);addEventListener('hashchange',restore);addEventListener('keydown',event=>{if(event.target.matches('select,button,input,textarea')||event.altKey||event.metaKey||event.ctrlKey||event.shiftKey)return;if(event.key==='ArrowLeft'&&page>1)show(page-1,true);if(event.key==='ArrowRight'&&page<total)show(page+1,true)});
+prev.onclick=()=>show(page-1,true);next.onclick=()=>show(page+1,true);jump.onchange=()=>show(Number(jump.value),true);addEventListener('hashchange',restore);addEventListener('keydown',event=>{if(modal.open||event.target.matches('select,button,input,textarea')||event.altKey||event.metaKey||event.ctrlKey||event.shiftKey)return;if(event.key==='ArrowLeft'&&page>1)show(page-1,true);if(event.key==='ArrowRight'&&page<total)show(page+1,true)});
 printButton.onclick=async()=>{printButton.disabled=true;printButton.textContent='Preparing…';try{const images=Array.from({length:total},(_,i)=>{const image=new Image();image.src=source(i+1);return image});await Promise.all(images.map(image=>image.decode()));document.querySelector('#print-pages').replaceChildren(...images);window.print()}catch{status.textContent='A page failed to load. Try printing again.'}finally{printButton.disabled=false;printButton.textContent='Print / Save PDF'}};
 restore();
 </script></body></html>
